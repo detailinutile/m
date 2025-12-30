@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mario Wimmer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --font-size: 13px;
+    --line-height: 1.45;
+    --margin-col: 90px;
+    --margin-gap: 16px;
+
+    --bg: #eef0f2;         /* light grey/beige */
+    --text: #111;
+    --muted: #777;
+    --link: #333;
+    --neon: #6fb3c8;       /* for bright yellow-green ceed00; */
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+  }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px 32px 64px;
+  }
+
+  /* Core grid row (used for name, sections, footer) */
+  .row {
+    display: grid;
+    grid-template-columns: var(--margin-col) minmax(0, 1fr);
+    column-gap: var(--margin-gap);
+  }
+
+  .row + .row {
+    margin-top: 24px;      /* consistent vertical rhythm */
+  }
+
+  /* Marginalia: section titles (default) */
+  .label {
+    justify-self: end;
+    text-align: right;
+    color: var(--text);     /* black */
+    font-weight: 600;       /* bold */
+  }
+
+  .content {
+    /* just the text column; no extra offsets */
+  }
+
+  /* Name */
+  .name {
+    font-weight: 600;
+  }
+
+  /* Body text & lists */
+  p {
+    margin: 0 0 8px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 0 0 8px;
+  }
+
+  /* Blocksatz throughout (content column) */
+  .content,
+  .content p,
+  .content li {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+
+  /* Neon highlight */
+  .neon {
+    background: var(--neon);
+    color: #111;
+    padding: 0.04em 0.22em;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Links: dotted neon underline */
+  a {
+    color: var(--link);
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--neon);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover {
+    opacity: 0.6;
+  }
+
+  /* Keep Updates neon */
+  #news .label {
+    font-weight: 400;
+  }
+
+  /* Publications hierarchy in marginalia */
+  .pub-main {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .pub-sub {
+    color: var(--muted);
+    font-weight: 400;
+    font-style: normal;   /* no italics */
+  }
+
+  /* Publication sub-sections: grey + 400 (but keep main Publications 600) */
+  #publications ~ .row .label {
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* Updates: align wrapped lines after dot, and left-align text */
+  #news .news-list li {
+    position: relative;
+    padding-left: 14px;      /* space for dot */
+    text-align: left;
+    text-justify: auto;
+  }
+
+  #news .news-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  #news .news-list li + li {
+    margin-top: 12px;
+  }
+
+  /* Collapsible blocks (About + Publications) */
+  details.collapse {
+    margin: 0 0 8px;
+  }
+
+  summary.collapse-summary {
+    cursor: pointer;
+    display: inline-block;
+    color: var(--muted);
+    font-weight: 400;
+    margin: 0 0 8px;
+    list-style: none;
+  }
+
+  summary.collapse-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Ellipsis indicator (closed = “… ”, open = none) */
+  summary.collapse-summary::before {
+    content: "… ";
+    color: var(--muted);
+  }
+
+  details[open] > summary.collapse-summary::before {
+    content: "";
+  }
+
+  /* Publication collapse container (valid HTML: details inside a final <li>) */
+  .pub-list .pub-hidden {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .pub-list li.pub-more {
+    margin-bottom: 0;
+  }
+
+  .pub-list li.pub-more details.collapse {
+    margin: 0;
+  }
+
+  .pub-list li.pub-more summary.collapse-summary {
+    margin: 0;
+  }
+
+  footer {
+    font-size: inherit;
+    color: var(--muted);
+  }
+</style>
+</head>
+
+<body>
+<main>
+
+  <!-- NAME ROW -->
+  <header class="row">
+    <div class="label"></div>
+    <div class="content name">
+      Mario Wimmer
+    </div>
+  </header>
+
+  <!-- info -->
+  <section class="row" id="info">
+    <div class="label"></div>
+    <div class="content">
+      <p>
+        Deputy director of the <a href="https://collegium.ethz.ch/">Collegium Helveticum · Swiss Institute of Advanced Study</a>
+      </p>
+      <p>
+     
+        
+      </p>
+    </div>
+  </section>
+
+
+  <!-- BIO -->
+  <section class="row" id="BIO">
+    <div class="label">About</div>
+
+    <div class="content">
+      <p>
+        As a historian, I am working on the conditions that facilitate intellectual work. At the Collegium Helveticum, I put these insights into practice by facilitating intellectual exchange among international fellows, the local academic community, and the wider public.
+</p>
+
+      <details class="collapse">
+        <summary class="collapse-summary">more</summary>
+<p>Since receiving a doctorate in modern history in 2010, I have worked in research and teaching at ETH Zurich, UC Berkeley, and the University of Basel. I have published on how modern societies engage with their past, the changing conditions of administrative and intellectual work, and the history of media. I also have experience as curator and continue working with artists at the Collegium. </p>
+<p>In 2022, I joined the Collegium Helveticum as executive director, and am responsible for its academic and artistic program. Together with my highly motivated colleagues, we have succeeded in positioning the Collegium as one of the leading institutes for advanced study, working each year with a cohort of thirty to forty international fellows from all disciplines, ranging from the natural sciences and engineering, life sciences and medicine, and the social sciences, economics, and law to the humanities and the arts. </p>
+<p>Over the past years, I helped start and secure funding for a scholars at risk program and serve on the board of the Virtural Ukrainian Institute of Advanced Study, based at the Wissenschaftskolleg zu Berlin. Currently, I co-chair a working group with Sophie Halart for NETIAS. In September 2025, the Collegium entered a partnership with the NOMIS Foundation, further strengthening its fellowship program.</p>
+      </details>
+<p>
+        <a href="mailto:ma.wimmer@gmail.com">email</a> ·
+        <a href="cv.pdf">cv</a> ·
+        <a href="https://hcommons.org/members/m/">commons</a>
+      </p>
+    </div>
+  </section>
+
+ 
+  <!-- NEWS -->
+  <section class="row" id="news">
+    <div class="label"><span class="neon">Updates</span></div>
+    <div class="content">
+      <ul class="news-list">
+        <li>
+          "Size Follows Function," editorial of the Collegium's <a href="https://collegium.ethz.ch/media/pages/news-publications/bc943fc9b2-1765181496/collegiumhelveticum_annual-report-2024-2025_digital_low-res.pdf">Annual Report</a>, together with Sebastian Bonhoeffer.
+        </li>
+<li>
+          The NOMIS Foundation and the Collegium Helveticum enter a <a href="https://collegium.ethz.ch/news-publications/partnership-between-the-nomis-foundation">partnership</a>
+        </li>
+<li>
+          <a href="https://collegium.ethz.ch/media/pages/news-publications/bc943fc9b2-1765181496/collegiumhelveticum_annual-report-2024-2025_digital_low-res.pdf">"Rehearsing the Future: An Experimental Encounter Between Science and Theater"</a>, conversation about the co-production <a href="https://collegium.ethz.ch/events/fellow-year-2024-2025/ministry-for-the-future">"Ministry for the Future" </a> with Theater Neumarkt and Kunsthochschule für Gestaltung Karlsruhe.
+        </li>
+        <li>
+           <a href="https://collegium.ethz.ch/events/fellow-year-2025-2026/new-perspectives-on-ludwik-fleck">Workshop "New Perspectives on Ludwik Fleck"</a>.
+        </li>
+        <li>
+          In <a href="https://collegium.ethz.ch/events/fellow-year-2023-2024/i-prefer-not-to">conversation</a> with Hito Steyerl.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+      
+  <section class="row" id="publications">
+  <div class="label">
+  <span class="pub-main">Publications</span><br>
+  <span class="pub-sub">Peer-reviewed journal articles</span>
+</div>
+
+  <div class="content">
+    <ul class="pub-list">
+
+      <li>
+        Wimmer, Mario. “Notes on a Prehistory of Poststructuralism.”
+        <em>History of the Humanities</em> 7, no. 2 (Fall 2022): 147–59.
+        <a href="https://doi.org/10.1086/721306">https://doi.org/10.1086/721306</a>.
+      </li>
+
+      <li>
+        Cronjäger, Lisa, Aurea Klarskov, Antonia von Schöning, and Mario Wimmer.
+        “Introduction: The Promises of Exactitude.”
+        <em>History of the Humanities</em> 7, no. 2 (Fall 2022): 127–31.
+        <a href="https://doi.org/10.1086/721304">https://doi.org/10.1086/721304</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “The Last Judgment Before the Last.”
+        <em>Modern Intellectual History</em>, online first August 2, 2021; print ed. 2022, 1227–44.
+        <a href="https://doi.org/10.1017/S1479244321000305">https://doi.org/10.1017/S1479244321000305</a>.
+      </li>
+<li>
+        Trüper, Henning, Jonathan Sheehan, and Mario Wimmer.
+        “History’s Religion: Beyond Secularized Eschatology.”
+        <em>Modern Intellectual History</em>, online first August 2, 2021; print ed. 2022, 1182–90.
+        <a href="https://doi.org/10.1017/S1479244321000299">https://doi.org/10.1017/S1479244321000299</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Kittsteiner’s History Out of Joint.”
+        <em>Journal of the Philosophy of History</em> 15, no. 3 (2021): 409–25.
+        <a href="https://doi.org/10.1163/18722636-12341469">https://doi.org/10.1163/18722636-12341469</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Josephine Miles (1911–1985): Doing Digital Humanism With and Without Machines.”
+        <em>History of the Humanities</em> 4, no. 2 (Fall 2019): 329–34.
+        <a href="https://doi.org/10.1086/704850">https://doi.org/10.1086/704850</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Aby Warburg (1866–1929): Reiterating the Pathways of Antique Traditions.”
+        <em>History of the Humanities</em> 4, no. 2 (Fall 2019): 299–304.
+        <a href="https://doi.org/10.1086/704818">https://doi.org/10.1086/704818</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Revisions and Revisionisms in Heinrich Otto Meisner’s Modern Diplomatics of Files.”
+        <em>Administory: Journal for the History of Administration</em> 3 (2019): 87–109.
+        <a href="https://doi.org/10.2478/adhi-2019-0006">https://doi.org/10.2478/adhi-2019-0006</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “The Afterlives of Scholarship: Warburg and Cassirer.”
+        <em>History of the Humanities</em> 2, no. 1 (2017): 245–70.
+        <a href="https://doi.org/10.1086/690581">https://doi.org/10.1086/690581</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “The Present as Future Past: Anonymous History of Historical Times.”
+        <em>Storia della Storiografia</em> 68 (2015): 165–83.
+        <a href="https://doi.org/10.1400/240647">https://doi.org/10.1400/240647</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Kantorowicz’s Oaths: A Californian Moment in the History of Academic Freedom.”
+        <em>Österreichische Zeitschrift für Geschichtswissenschaften</em> 25, no. 3 (2014): 116–47.
+        <a href="https://doi.org/10.25365/oezg-2014-25-3-6">https://doi.org/10.25365/oezg-2014-25-3-6</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “On Sources: Mythical and Historical Thinking in Fin-de-Siècle Vienna.”
+        <em>Res: Anthropology and Aesthetics</em> 63–64 (2013): 108–24.
+        <a href="https://doi.org/10.1086/690981">https://doi.org/10.1086/690981</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario.
+        “Über die Wirkung geschichtswissenschaftlicher Texte.”
+        <em>Schweizerische Zeitschrift für Geschichte</em> 62, no. 2 (2012): 217–38.
+        <a href="https://doi.org/10.5169/seals-306524">https://doi.org/10.5169/seals-306524</a>.
+      </li>
+
+
+
+    </ul>
+  </div>
+</section>
+
+<section class="row">
+  <div class="label">Articles in reviewed journals</div>
+  <div class="content">
+    <ul class="pub-list">
+
+      <li>
+        Wimmer, Mario. “Gehirnausstülpungen: Zur Wissenschaftsgeschichte intellektueller Arbeit.”
+        <em>Berichte zur Wissenschaftsgeschichte</em> 41, no. 4 (2018): 449–52.
+        <a href="https://doi.org/10.1002/bewi.201801915">https://doi.org/10.1002/bewi.201801915</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Das Kapital neu lesen.”
+        <em>WerkstattGeschichte</em> 77 (2018): 111–16.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Zur Ökonomie des Dilettantismus: Aby Warburgs Kredit.”
+        <em>Neue Rundschau</em> 128, no. 3 (2017): 69–81.
+      </li>
+<li>
+        Wimmer, Mario. “Rankes Quellen.”
+        In <em>Historicum</em>, special issue “Leopold Ranke,” edited by Michael Pammer and Peter Schöttler,
+        XXXIV (Fall/Winter 2015): 48–65.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Der Geschmack des Archivs und der Historische Sinn.”
+        <em>Historische Anthropologie</em> 20, no. 1 (2012): 90–107.
+        <a href="https://doi.org/10.7788/ha.2012.20.1.90">https://doi.org/10.7788/ha.2012.20.1.90</a>.
+      </li>
+
+      <li>
+        Ash, Mitchell G., and Mario Wimmer.
+        “Kastalia. Zur Interpretation einer Statue im Arkadenhof der Universität Wien im Kontext der Wiener Moderne.”
+        <em>Mitteilungen des Österreichischen Staatsarchivs</em> 55 (2011): 1137–56.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Die Lagen der Historik.”
+        <em>Österreichische Zeitschrift für Geschichtswissenschaften</em> 18, no. 2 (2007): 106–25.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Unter den Talaren.”
+        <em>Österreichische Zeitschrift für Geschichtswissenschaften</em> 16, no. 2 (2005): 129–38.
+        <a href="https://doi.org/10.25365/oezg-2005-16-2-8">https://doi.org/10.25365/oezg-2005-16-2-8</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Archive, Akten, Zettelkästen.”
+        <em>Österreichische Zeitschrift für Geschichtswissenschaften</em> 13, no. 3 (2002): 150–54.
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+
+<section class="row">
+  <div class="label">Books</div>
+  <div class="content">
+    <ul class="pub-list">
+      <li>
+        Wimmer, Mario.
+        <em>Archivkörper: Eine Geschichte historischer Einbildungskraft</em>.
+        Konstanz: Konstanz University Press, 2012. Reissued 2013.
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="row">
+  <div class="label">Edited books</div>
+  <div class="content">
+    <ul class="pub-list">
+
+      <li>
+        Krajewski, Markus, Antonia von Schöning, and Mario Wimmer, eds.
+        <em>Enzyklopädie der Genauigkeit</em>.
+        Konstanz: Konstanz University Press, 2021.
+      </li>
+
+      <li>
+        Kwaschik, Anne, and Mario Wimmer, eds.
+        <em>Von der Arbeit des Historikers: Ein Wörterbuch zu Theorie und Praxis der Geschichtswissenschaft</em>.
+        Bielefeld: Transcript, 2012.
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+
+<section class="row">
+  <div class="label">Editorial work</div>
+  <div class="content">
+    <ul class="pub-list">
+
+      <li>
+        Cronjäger, Lisa, Aurea Klarskov, Antonia von Schöning, and Mario Wimmer, eds.
+        “The Promises of Exactitude.”
+        Special issue, <em>History of the Humanities</em> 7, no. 2 (Fall 2022).
+      </li>
+
+      <li>
+        Trüper, Henning, Jonathan Sheehan, and Mario Wimmer, eds.
+        “History’s Religion: Beyond Secularized Eschatology.”
+        Special issue, <em>Modern Intellectual History</em>, online first August 2, 2021; print ed. 2022.
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<section class="row">
+  <div class="label">Contributions to books</div>
+  <div class="content">
+    <ul class="pub-list">
+
+      <li>
+  Wimmer, Mario. "Ungeschriebene Bücher, "
+  In <em>Über Bücher: 101 Texte und Bilder für Michael Hagner</em>, edited by Barner, Ines, Stephan Graf, Nils Güttler, Niki Rhyner, Vera Wolff, and Monika Wulz, 207-210.
+  Göttingen: Wallstein Verlag, 2025.
+</li>
+
+      <li>
+        Wimmer, Mario. “Serialität als Historiografie.”
+        In <em>Handbuch Televisuelle Serialität</em>, edited by Sven Grampp and Olga Moskatova, 1–22.
+        Wiesbaden: Springer, 2023.
+        <a href="https://doi.org/10.1007/978-3-658-35305-6_42-1">https://doi.org/10.1007/978-3-658-35305-6_42-1</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario.
+        “Ranke’s World History in Six Instalments: Epistemic Seriality and the Epistemology of Series.”
+        In <em>Truth in Serial Form</em>, edited by Malika Maskarinec, 55–81.
+        Berlin: De Gruyter, 2023.
+        <a href="https://doi.org/10.1515/9783110795110-003">https://doi.org/10.1515/9783110795110-003</a>.
+      </li>
+<li>
+        Wimmer, Mario. “Autopsie und Augenlust.”
+        In <em>Enzyklopädie der Genauigkeit</em>, 34–45.
+        Konstanz: Konstanz University Press/Wallstein, 2021.
+      </li>
+
+      <li>
+        Wimmer, Mario. “‘Wie es eigentlich gewesen.’”
+        In <em>Enzyklopädie der Genauigkeit</em>, 518–35.
+        Konstanz: Konstanz University Press/Wallstein, 2021.
+      </li>
+
+      <li>
+        Krajewski, Markus, Antonia von Schöning, and Mario Wimmer.
+        “Verzweigungen der Wissenschaften und Künste.”
+        In <em>Enzyklopädie der Genauigkeit</em>, 12–19.
+        Konstanz: Konstanz University Press/Wallstein, 2021.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Geistige Arbeit: Zur Normalisierung einer Notlage.”
+        In <em>Entbehrung und Genuss</em>, edited by Gleb Albert et al.
+        Berlin: Dietz-Verlag, 2021.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Mikrologien vergangenen Lebens.”
+        <em>BMCCT Working Papers</em> 2 (2020).
+        <a href="https://doi.org/10.5451/unibas-ep78149">https://doi.org/10.5451/unibas-ep78149</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Papierorganismen.”
+        In <em>Ränder des Archivs</em>, edited by Falco Schmieder and Daniel Weidner, 47–71.
+        Berlin: Kadmos, 2016.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Conceptual History: Begriffsgeschichte.”
+        In <em>International Encyclopedia of the Social &amp; Behavioral Sciences</em>, 2nd ed., vol. 4,
+        edited by James D. Wright, 548–54.
+        Oxford: Elsevier, 2015.
+        <a href="https://doi.org/10.1016/B978-0-08-097086-8.03074-9">https://doi.org/10.1016/B978-0-08-097086-8.03074-9</a>.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Dispositiv.”
+        In <em>Über die Praxis des kulturwissenschaftlichen Arbeitens</em>, edited by Ute Frietsch et al., 123–28.
+        Bielefeld: Transcript, 2013.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Register.”
+        In <em>Über die Praxis des kulturwissenschaftlichen Arbeitens</em>, edited by Ute Frietsch et al., 340–45.
+        Bielefeld: Transcript, 2013.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Verkehr: Rhythmus 21.”
+        In <em>Hans Richters Rhythmus 21</em>, edited by Christoph Bareither et al., 158–71.
+        Würzburg: Königshausen &amp; Neumann, 2012.
+      </li>
+
+      <li>
+        Wimmer, Mario. “Die kalte Sprache des Lebendigen.”
+        In <em>Sprachvollzug im Amt</em>, edited by Peter Becker, 45–75.
+        Bielefeld: Transcript, 2012.
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<section class="row">
+  <div class="label">Translations</div>
+  <div class="content">
+    <ul class="pub-list">
+      <li>
+        Translations of texts by Nathalie Z. Davis, Anthony Grafton, John L. Harvey,
+        Lionel Gossman, Omar Nasim, and Randolph Starn.
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="row">
+  <div class="label">Conversations</div>
+  <div class="content">
+    <ul class="pub-list">
+
+      <li>
+        Starn, Randolph, Mario Wimmer.
+        “Ein Toast auf das langsame Buch!”
+        <em>zeitenblicke</em> 9, no. 2 (2010).
+        <a href="urn:nbn:de:0009-9-25888">urn:nbn:de:0009-9-25888</a>.
+      </li>
+
+      <li>
+        Raulff, Ulrich, Mario Wimmer.
+        “Das ist wie ein künstlerischer Arbeitsprozess.”
+        <em>Österreichische Zeitschrift für Geschichtswissenschaften</em> 20, no. 1 (2009): 181–94.
+        <a href="https://doi.org/10.25365/oezg-2009-20-1-8">https://doi.org/10.25365/oezg-2009-20-1-8</a>.
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+
+
+
+
+  <!-- FOOTER -->
+  <footer class="row">
+    <div class="label"></div>
+    <div class="content">
+      last updated: 2025-12-06
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  (function () {
+    const lists = document.querySelectorAll("ul.pub-list");
+    lists.forEach((ul) => {
+      const items = Array.from(ul.children).filter(
+        (el) => el.tagName === "LI" && !el.classList.contains("pub-more")
+      );
+      if (items.length <= 3) return;
+
+      const liMore = document.createElement("li");
+      liMore.className = "pub-more";
+
+      const details = document.createElement("details");
+      details.className = "collapse";
+
+      const summary = document.createElement("summary");
+      summary.className = "collapse-summary";
+      summary.textContent = "more";
+
+      const hiddenUl = document.createElement("ul");
+      hiddenUl.className = "pub-hidden";
+
+      items.slice(3).forEach((li) => hiddenUl.appendChild(li));
+
+      details.appendChild(summary);
+      details.appendChild(hiddenUl);
+      liMore.appendChild(details);
+      ul.appendChild(liMore);
+    });
+  })();
+</script>
+
+</body>
+</html>
+
